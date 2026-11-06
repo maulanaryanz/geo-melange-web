@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block title %}Portofolio & Rekam Jejak Proyek{% endblock %}
+
+{% block content %}
+<!-- Header Hero Portofolio -->
+<section class="relative bg-brand-dark text-white py-20 lg:py-24 overflow-hidden border-b border-slate-800">
+  <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="max-w-3xl">
+      <span class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-lime/10 border border-brand-lime/30 text-brand-lime text-xs font-bold uppercase tracking-wider mb-4">
+        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+        <span>Track Record Proyek</span>
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+        Portofolio & Kajian Lapangan
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+        Dokumentasi pekerjaan survei terestris, kajian studi geologi, tata ruang wilayah, dan eksplorasi spasial yang telah diselesaikan CV. Geo Melange bersama instansi pemerintah maupun mitra swasta.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Konten Utama: Filter & Grid Portofolio -->
+<section class="py-16 bg-slate-50 min-h-[600px]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Tab Navigasi Filter Kategori Proyek -->
+    <div class="flex flex-wrap items-center justify-start sm:justify-center gap-2 pb-10">
+      <button type="button" onclick="filterCategory('all')" class="filter-btn active-tab px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-sm">
+        Semua Kategori
+      </button>
+      <button type="button" onclick="filterCategory('studi_teknik')" class="filter-btn inactive-tab px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-sm">
+        Studi & Bantuan Teknik
+      </button>
+      <button type="button" onclick="filterCategory('pariwisata')" class="filter-btn inactive-tab px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-sm">
+        Kepariwisataan
+      </button>
+      <button type="button" onclick="filterCategory('survey')" class="filter-btn inactive-tab px-4 py-2 rounded-xl text-xs font-bold transition-all border shadow-sm">
+        Jasa Survey
+      </button>
+    </div>
+
+    <!-- Grid Kartu Portofolio -->
+    <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for project in portofolios %}
+        <div class="project-card group bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brand-blue/50 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1.5" data-category="{{ project.category }}">
+          
+          <div>
+            <!-- Foto Lapangan (Muncul jika ada foto yang diunggah di admin) -->
+            {% if project.image %}
+              <div class="w-full h-48 overflow-hidden bg-slate-100 border-b border-slate-100 relative">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            {% endif %}
+
+            <div class="p-6">
+              <!-- Header Kartu: Kategori Bersih (Tanpa Kotak Biru) & Tahun -->
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue">
+                  {{ project.get_category_display }}
+                </span>
+                <span class="inline-flex items-center space-x-1 text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md shrink-0">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                  <span>{{ project.year }}</span>
+                </span>
+              </div>
+
+              <!-- Judul Proyek -->
+              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-2 leading-snug mb-3">
+                {{ project.title }}
+              </h3>
+
+              <!-- Deskripsi Pekerjaan -->
+              <p class="text-xs text-slate-600 leading-relaxed font-normal line-clamp-3">
+                {% if project.description and project.description != '.' %}
+                  {{ project.description }}
+                {% else %}
+                  Pekerjaan konsultansi profesional dan pendampingan teknis bidang kebumian terpadu.
+                {% endif %}
+              </p>
+            </div>
+          </div>
+
+          <!-- Metadata Footer Kartu: Mitra & Lokasi (Tanpa Teks Rincian) -->
+          <div class="px-6 py-4 bg-slate-50/70 border-t border-slate-100 flex flex-col gap-2 text-xs">
+            <div class="flex items-start space-x-2 text-slate-700">
+              <i data-lucide="building-2" class="w-4 h-4 text-brand-blue shrink-0 mt-0.5"></i>
+              <span class="leading-tight"><span class="text-slate-400 font-normal">Mitra:</span> <strong class="font-semibold text-slate-800">{{ project.client_name }}</strong></span>
+            </div>
+            <div class="flex items-center space-x-1.5 text-slate-600 pt-1.5 border-t border-slate-200/50">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i>
+              <span class="font-medium">{{ project.location }}</span>
+            </div>
+          </div>
+
+        </div>
+      {% empty %}
+        <div class="col-span-full py-20 text-center bg-white rounded-3xl border border-dashed border-slate-300">
+          <div class="w-16 h-16 rounded-2xl bg-sky-50 text-brand-blue flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="folder-search" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-base font-bold text-slate-800">Belum Ada Rekam Jejak Proyek</h3>
+          <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+            Data proyek belum ditambahkan atau filter kategori yang dipilih belum memiliki daftar pekerjaan.
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pesan Kosong Saat Filter Tidak Menemukan Proyek -->
+    <div id="noResults" class="hidden py-16 text-center bg-white rounded-3xl border border-dashed border-slate-300">
+      <i data-lucide="search-x" class="w-10 h-10 text-slate-400 mx-auto mb-3"></i>
+      <p class="text-sm font-semibold text-slate-700">Tidak ada proyek pada kategori ini.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Banner Call to Action (CTA) -->
+<section class="py-16 bg-white border-t border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-brand-dark rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-lime">Konsultasi Kerjasama</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Punya Agenda Survei atau Perencanaan Wilayah?</h2>
+        <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          Diskusikan kerangka acuan kerja bersama tim ahli CV. Geo Melange untuk estimasi metode dan output teknis terbaik.
+        </p>
+      </div>
+      <a href="{% url 'kontak' %}" class="shrink-0 px-6 py-3.5 bg-brand-blue hover:bg-brand-blue-hover text-white font-bold rounded-xl shadow-lg shadow-brand-blue/30 transition text-xs sm:text-sm flex items-center space-x-2">
+        <span>Ajukan KAK Proyek</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CSS & Logika Filter Interaktif -->
+<style>
+  .active-tab {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+    border-color: #0284c7 !important;
+  }
+  .inactive-tab {
+    background-color: #ffffff !important;
+    color: #475569 !important;
+    border-color: #e2e8f0 !important;
+  }
+  .inactive-tab:hover {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+</style>
+
+<script>
+  function filterCategory(category) {
+    const cards = document.querySelectorAll('.project-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    const noResults = document.getElementById('noResults');
+    let visibleCount = 0;
+
+    buttons.forEach(btn => {
+      btn.classList.remove('active-tab');
+      btn.classList.add('inactive-tab');
+    });
+    event.currentTarget.classList.remove('inactive-tab');
+    event.currentTarget.classList.add('active-tab');
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      if (category === 'all' || cardCategory === category) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0 && cards.length > 0) {
+      noResults.classList.remove('hidden');
+    } else {
+      noResults.classList.add('hidden');
+    }
+  }
+</script>
+{% endblock %}

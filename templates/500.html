@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}500 - Gangguan Layanan Server{% endblock %}
+
+{% block content %}
+<section class="py-24 bg-slate-50 min-h-[72vh] flex items-center">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-rose-50 border border-rose-100 text-rose-600 mb-6 shadow-sm">
+      <i data-lucide="server-crash" class="w-10 h-10"></i>
+    </div>
+
+    <span class="block text-xs font-extrabold uppercase tracking-widest text-rose-600 mb-2">
+      Error 500 — Gangguan TeknisInternal
+    </span>
+    
+    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
+      Terjadi Kendala Pemrosesan
+    </h1>
+    
+    <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-8">
+      Sistem kami sedang mengalami kendala teknis sementara. Silakan muat ulang halaman beberapa saat lagi atau kembali ke halaman utama.
+    </p>
+
+    <div class="flex items-center justify-center">
+      <a href="/" class="px-6 py-3.5 bg-brand-dark hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg transition text-xs sm:text-sm flex items-center space-x-2">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+        <span>Muat Ulang Beranda</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}  

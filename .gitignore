@@ -1,0 +1,49 @@
+# ==========================================================
+# 1. KEAMANAN & VARIABEL LINGKUNGAN (WAJIB DISEMBUNYIKAN)
+# ==========================================================
+.env
+.env.*
+*.env
+
+# ==========================================================
+# 2. CACHE PYTHON & BYTECODE
+# ==========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================================
+# 3. VIRTUAL ENVIRONMENT LOKAL
+# ==========================================================
+venv/
+.venv/
+env/
+ENV/
+
+# ==========================================================
+# 4. HASIL COLLECTSTATIC & LOG DJANGO
+# ==========================================================
+# Folder ini akan dibuat ulang otomatis di server hosting
+staticfiles/
+*.log
+local_settings.py
+
+# ==========================================================
+# 5. KONFIGURASI EDITOR & SISTEM OPERASI
+# ==========================================================
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ==========================================================
+# 6. DATABASE & MEDIA (OPSIONAL)
+# ==========================================================
+# Biarkan tanda pagar (#) di bawah ini jika Anda ingin data portofolio 
+# dan foto yang sudah diinput di laptop ikut terunggah ke GitHub/Server.
+# Hapus tanda pagar (#) jika ingin server memulai dengan database kosong.
+# db.sqlite3
+# db.sqlite3-journal
+# media/

@@ -1,0 +1,22 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+  /* Menghilangkan kotak centang dan teks 'Hapus' pada dokumen lampiran */
+  input[name="document-clear"],
+  label[for="document-clear_id"],
+  .clearable-file-input {
+    display: none !important;
+  }
+
+  /* Mengunci hitbox input file agar pas dan tidak meluber ke bawah */
+  input[name="document"] {
+    display: inline-block !important;
+    height: auto !important;
+    line-height: normal !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+  }
+</style>
+{% endblock %}

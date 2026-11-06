@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}404 - Halaman Tidak Ditemukan{% endblock %}
+
+{% block content %}
+<section class="py-24 bg-slate-50 min-h-[72vh] flex items-center">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Ikon Kompas Geospasial -->
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-sky-50 border border-sky-100 text-brand-blue mb-6 shadow-sm">
+      <i data-lucide="compass" class="w-10 h-10"></i>
+    </div>
+
+    <span class="block text-xs font-extrabold uppercase tracking-widest text-brand-blue mb-2">
+      Error 404 — Koordinat Tidak Ditemukan
+    </span>
+    
+    <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight mb-4">
+      Halaman Tidak Tersedia
+    </h1>
+    
+    <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-8">
+      Maaf, alamat URL atau dokumen yang Anda tuju tidak ditemukan dalam sistem portal CV. Geo Melange. Halaman mungkin telah dipindahkan atau alamat tautan salah diketik.
+    </p>
+
+    <!-- Tombol Navigasi Tunggal Kembali ke Beranda -->
+    <div class="flex items-center justify-center">
+      <a href="{% url 'home' %}" class="px-6 py-3.5 bg-brand-blue hover:bg-brand-blue-hover text-white font-bold rounded-xl shadow-lg shadow-brand-blue/20 transition text-xs sm:text-sm flex items-center justify-center space-x-2">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Kembali ke Beranda</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

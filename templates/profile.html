@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil Perusahaan{% endblock %}
+
+{% block content %}
+<!-- Header Halaman Profil -->
+<section class="bg-brand-dark text-white py-16 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="text-xs font-bold uppercase tracking-wider text-brand-lime">Tentang Kami</span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold mt-2 tracking-tight">Profil Korporat CV. Geo Melange</h1>
+    <p class="mt-4 text-slate-300 max-w-2xl text-sm leading-relaxed">
+      Didirikan di Kebumen, CV. Geo Melange berdedikasi menyediakan layanan konsultansi keteknikan bumi, survei geospasial presisi tinggi, dan pendampingan mitigasi bencana.
+    </p>
+  </div>
+</section>
+
+<!-- Konten Visi, Misi & Pendekatan Teknis -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    
+    <!-- Visi & Misi -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Kotak Visi (Aksen Biru Logo) -->
+      <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm hover:border-brand-blue/40 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-sky-50 text-brand-blue flex items-center justify-center mb-5 border border-sky-100">
+          <i data-lucide="eye" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-xl font-bold text-slate-900 mb-3">Visi Perusahaan</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Menjadikan CV. Geo Melange sebagai Perusahaan yang mampu bersaing di tingkat Lokal, Regional dan Nasional pada sektor jasa konsultansi bidang Surveying, Pertambangan dan Energi, Pariwisata, jasa studi-penelitian dan bantuan teknis dan jasa khusus.
+        </p>
+      </div>
+
+      <!-- Kotak Misi (Aksen Hijau Lime Logo) -->
+      <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm hover:border-brand-lime/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-lime-50 text-lime-700 flex items-center justify-center mb-5 border border-lime-200/60">
+          <i data-lucide="target" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-xl font-bold text-slate-900 mb-3">Misi Perusahaan</h2>
+        <ul class="space-y-3 text-sm text-slate-600">
+          <li class="flex items-start space-x-2.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-blue shrink-0 mt-0.5"></i>
+            <span>Melaksanakan pekerjaan secara tuntas dan paripurna.</span>
+          </li>
+          <li class="flex items-start space-x-2.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-blue shrink-0 mt-0.5"></i>
+            <span>Adaptif dan profesional dalam setiap penugasan teknik.</span>
+          </li>
+          <li class="flex items-start space-x-2.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-blue shrink-0 mt-0.5"></i>
+            <span>Didukung oleh SDM yang handal dan berintegritas.</span>
+          </li>
+          <li class="flex items-start space-x-2.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-blue shrink-0 mt-0.5"></i>
+            <span>Menghasilkan dan memberikan hasil studi terbaik bagi seluruh mitra kerja.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Nilai Keunggulan Teknis -->
+    <div>
+      <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-blue">Standar Mutu</span>
+        <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Keunggulan & Pendekatan Teknis</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-sky-50 text-brand-blue flex items-center justify-center mb-4">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1.5">Tenaga Ahli Bersertifikat</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-normal">
+            Didukung praktisi geologi, hidrologi, dan geodesi yang berpengalaman dalam berbagai studi teknis nasional.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-sky-50 text-brand-blue flex items-center justify-center mb-4">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1.5">Instrumentasi Modern</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-normal">
+            Pemanfaatan GNSS Geodetik RTK, Drone UAV Pemetaan fotogrametri, serta perangkat lunak spasial standar industri.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all">
+          <div class="w-10 h-10 rounded-lg bg-sky-50 text-brand-blue flex items-center justify-center mb-4">
+            <i data-lucide="file-check" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1.5">Output KAK Sesuai Regulasi</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-normal">
+            Laporan teknis disusun sistematis sesuai pedoman BIG (Badan Informasi Geospasial) dan Kementerian ESDM/PUPR.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

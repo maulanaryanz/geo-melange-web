@@ -1,0 +1,176 @@
+{% extends "admin/index.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+  /* Menata Tata Letak Utama Menjadi Dashboard Fleksibel */
+  #content {
+    max-width: 1320px !important;
+    margin: 24px auto !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 32px !important;
+  }
+
+  /* Kolom Kiri: Tabel Modul Utama (CORE & Autentikasi) */
+  #content-main {
+    flex: 1 1 64% !important;
+    min-width: 320px !important;
+    float: none !important;
+    margin: 0 !important;
+    width: auto !important;
+  }
+
+  /* Kolom Kanan: Panel Aktivitas (Tindakan Terbaru) */
+  #content-related {
+    flex: 1 1 30% !important;
+    min-width: 280px !important;
+    float: none !important;
+    margin: 0 !important;
+    width: auto !important;
+  }
+
+  /* Desain Kartu Modul */
+  .module {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+  }
+
+  /* Header Kartu (Judul Grup & Core) */
+  .module caption,
+  #recent-actions-module h2 {
+    background: #0f172a !important;
+    color: #38bdf8 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #334155 !important;
+  }
+
+  /* Baris Tabel Modul */
+  .module table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .module tr {
+    transition: background-color 0.15s ease !important;
+    border-bottom: 1px solid #334155 !important;
+  }
+
+  .module tr:last-child {
+    border-bottom: none !important;
+  }
+
+  .module tr:hover {
+    background-color: #273549 !important;
+  }
+
+  .module th,
+  .module td {
+    padding: 12px 18px !important;
+    font-size: 13px !important;
+    vertical-align: middle !important;
+  }
+
+  .module th a {
+    color: #f1f5f9 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+
+  .module th a:hover {
+    color: #38bdf8 !important;
+  }
+
+  /* Tombol Aksi Tambah & Ubah */
+  .module .addlink,
+  .module .changelink {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 5px 12px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: 0.2s ease !important;
+  }
+
+  .module .addlink {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+    margin-right: 6px !important;
+  }
+
+  .module .addlink:hover {
+    background-color: #0369a1 !important;
+  }
+
+  .module .changelink {
+    background-color: #334155 !important;
+    color: #cbd5e1 !important;
+  }
+
+  .module .changelink:hover {
+    background-color: #475569 !important;
+    color: #ffffff !important;
+  }
+
+  /* Panel Tindakan Terbaru */
+  #recent-actions-module {
+    padding-bottom: 10px !important;
+  }
+
+  #recent-actions-module h3 {
+    display: none !important;
+  }
+
+  #recent-actions-module ul.actionlist {
+    margin: 0 !important;
+    padding: 8px 12px !important;
+    max-height: 480px !important;
+    overflow-y: auto !important;
+  }
+
+  #recent-actions-module ul.actionlist li {
+    padding: 10px 8px !important;
+    border-bottom: 1px solid #334155 !important;
+    font-size: 12px !important;
+    color: #94a3b8 !important;
+    line-height: 1.4 !important;
+  }
+
+  #recent-actions-module ul.actionlist li:last-child {
+    border-bottom: none !important;
+  }
+
+  #recent-actions-module ul.actionlist a {
+    color: #38bdf8 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+
+  #recent-actions-module ul.actionlist a:hover {
+    text-decoration: underline !important;
+  }
+
+  /* Penyesuaian Responsif untuk Perangkat Bergerak */
+  @media (max-width: 900px) {
+    #content {
+      flex-direction: column !important;
+    }
+    #content-main,
+    #content-related {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+    }
+  }
+</style>
+{% endblock %}
