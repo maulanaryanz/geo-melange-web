@@ -1,33 +1,77 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from .models import portofolio, Inquiry
+from .models import BidangLayanan, portofolio, Inquiry
+
+
+@admin.register(BidangLayanan)
+class BidangLayananAdmin(admin.ModelAdmin):
+    actions = None
+    list_display = ('name', 'shortcut_aksi')
+    search_fields = ('name',)
+
+    @admin.display(description='')
+    def shortcut_aksi(self, obj):
+        edit_url = reverse('admin:core_bidanglayanan_change', args=[obj.pk])
+        delete_url = reverse('admin:core_bidanglayanan_delete', args=[obj.pk])
+        return format_html(
+            '<div style="display:flex; align-items:center; justify-content:flex-end; white-space:nowrap;">'
+            '<a href="{}" title="Ubah Bidang" '
+            'style="display:inline-flex; align-items:center; justify-content:center; '
+            'width:28px; height:28px; border-radius:6px; background:rgb(239,246,255); '
+            'color:rgb(37,99,235); margin-right:6px; text-decoration:none; '
+            'border:1px solid rgb(191,219,254);">'
+            '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" '
+            'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+            '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'
+            '</svg></a>'
+            '<a href="{}" title="Hapus Bidang" '
+            'style="display:inline-flex; align-items:center; justify-content:center; '
+            'width:28px; height:28px; border-radius:6px; background:rgb(254,242,242); '
+            'color:rgb(220,38,38); text-decoration:none; border:1px solid rgb(254,202,202);">'
+            '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" '
+            'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+            '<polyline points="3 6 5 6 21 6"/>'
+            '<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'
+            '<line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>'
+            '</svg></a>'
+            '</div>',
+            edit_url,
+            delete_url,
+        )
 
 
 @admin.register(portofolio)
 class portofolioAdmin(admin.ModelAdmin):
-    # 1. Menghapus bar dropdown "Aksi" dan kotak centang (checkbox) di sisi kiri
     actions = None
+    list_display = ('year', 'title', 'category', 'location', 'client_name', 'contract_value', 'shortcut_aksi')
+    list_filter = ('year', 'category')
+    search_fields = ('title', 'client_name', 'location', 'contract_info')
 
-    # 2. Menampilkan data utama beserta kolom ikon shortcut di sisi paling kanan
-    list_display = (
-        'title',
-        'category',
-        'client_name',
-        'year',
-        'location',
-        'shortcut_aksi',
+    fieldsets = (
+        ('Informasi Utama Pekerjaan', {
+            'fields': ('year', 'title', 'category', 'location')
+        }),
+        ('Pemberi Tugas / Pengguna Jasa', {
+            'fields': ('client_name', 'client_address')
+        }),
+        ('Detail Kontrak & Nilai', {
+            'fields': ('contract_info', 'contract_value')
+        }),
+        ('Tanggal Selesai Menurut', {
+            'fields': ('contract_end_date', 'handover_date')
+        }),
+        ('Dokumentasi (Opsional)', {
+            'fields': ('image',),
+            'classes': ('collapse',)
+        }),
     )
-    list_filter = ('category', 'year')
-    search_fields = ('title', 'client_name', 'location')
 
-    # 3. Membuat deretan ikon shortcut (Lihat Foto, Edit/Pensil, Hapus/Tempat Sampah)
     @admin.display(description='')
     def shortcut_aksi(self, obj):
         edit_url = reverse('admin:core_portofolio_change', args=[obj.pk])
         delete_url = reverse('admin:core_portofolio_delete', args=[obj.pk])
 
-        # Tombol Ikon Mata (Hanya muncul jika proyek memiliki foto lapangan)
         if obj.image:
             view_btn = format_html(
                 '<a href="{}" target="_blank" title="Lihat Foto Dokumentasi" '
@@ -44,7 +88,6 @@ class portofolioAdmin(admin.ModelAdmin):
         else:
             view_btn = ''
 
-        # Menggabungkan Ikon Mata, Pensil (Ubah), dan Tempat Sampah (Hapus)
         return format_html(
             '<div style="display:flex; align-items:center; justify-content:flex-end; white-space:nowrap;">'
             '{}'
@@ -73,7 +116,6 @@ class portofolioAdmin(admin.ModelAdmin):
             delete_url,
         )
 
-    # 4. Mengubah tombol teks "TAMBAHKAN PORTOFOLIO PROYEK +" menjadi ikon (+) saja
     class Media:
         css = {
             'all': (
